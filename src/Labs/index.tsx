@@ -8,11 +8,9 @@ export default function Labs() {
   return (
     <div>
       <h1>Labs</h1>
-      {/* 添加链接到 GitHub 仓库 */}
       <a href="https://github.com/Ayukawa813/kanbas-react-web-app.git" id="wd-github">
         Visit our GitHub Repository
       </a>
-      {/* 添加全名 */}
       <p>Shuang Liu</p>
       <TOC />
       <Routes>
