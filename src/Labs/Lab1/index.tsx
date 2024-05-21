@@ -366,7 +366,7 @@ Please
 
 to get dummy text<br/>
 
-Please <a id="wd-github" href="https://github.com/your-username/your-repo">visit my GitHub</a> 
+Please <a id="wd-github" href="https://github.com/Ayukawa813/kanbas-react-web-app.git">visit my GitHub</a> 
 
 to see the code<br/>
 </div>
