@@ -9,7 +9,7 @@ function App() {
 
     <HashRouter>
 
-      <div>
+      <div className="h-100">
 
         <Routes>
 

@@ -1,0 +1,48 @@
+.container {
+    max-width: 1000px; /* 限制最大宽度，根据需要调整 */
+    margin: 20px auto; /* 居中显示 */
+}
+
+.search-bar, .btn-group {
+    margin-bottom: 15px;
+}
+
+.table-responsive {
+    background-color: white;
+    border-radius: 5px;
+    overflow-x: auto; /* 允许水平滚动 */
+}
+
+.table {
+    margin-bottom: 0; /* 移除表格下方间距 */
+}
+
+.table th, .table td {
+    vertical-align: middle; /* 垂直居中 */
+}
+
+/* 更精确的按钮和搜索框样式 */
+.btn, .form-control {
+    height: 38px; /* 统一高度 */
+}
+
+/* 特定的按钮样式 */
+.btn-outline-primary {
+    color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-outline-primary:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.dropdown-toggle::after {
+    display: none; /* 移除下拉箭头，如果不需要 */
+}
+
+/* 输入框的默认样式，例如在表格中 */
+input[type="text"].form-control {
+    width: auto; /* 自动宽度 */
+    display: inline-block; /* 行内显示 */
+}

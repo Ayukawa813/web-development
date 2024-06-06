@@ -6,25 +6,23 @@ export default function Home() {
 
   return (
 
-    <table id="wd-home">
 
-      <tr>
+<div id="wd-home" className="d-flex">
 
-        <td valign="top">
+  <div className="flex-fill me-5">
 
-          <Modules />
+    <Modules />
 
-        </td>
 
-        <td valign="top">
+  </div>
 
-          <CourseStatus />
+  <div className="d-none d-xl-block">
 
-        </td>
+    <CourseStatus />
 
-      </tr>
+  </div>
 
-    </table>
+</div>
 
   );
 
