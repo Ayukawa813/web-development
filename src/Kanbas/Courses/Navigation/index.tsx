@@ -43,17 +43,18 @@ export default function CoursesNavigation() {
                 `}
             </style>
             <ul id="wd-courses-navigation">
-                {links.map(link => (
-                    <li key={link.name}>
-                        <Link
-                            to={`/Kanbas/Courses/${cid}/${link.path}`}
-                            className={location.pathname.includes(link.path) ? 'active' : ''}
-                        >
-                            {link.name}
-                        </Link>
-                    </li>
-                ))}
-            </ul>
+    {links.map(link => (
+        <li key={`${cid}-${link.name}`}>
+            <Link
+                to={`/Kanbas/Courses/${cid}/${link.path}`}
+                className={location.pathname.includes(link.path) ? 'active' : ''}
+            >
+                {link.name}
+            </Link>
+        </li>
+    ))}
+</ul>
+
         </>
     );
 }

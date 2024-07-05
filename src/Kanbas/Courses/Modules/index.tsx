@@ -1,41 +1,52 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import db from "../../Database";
-import { BsGripVertical } from 'react-icons/bs';
 import ModulesControls from "./ModulesControls";
-import LessonControlButtons from './LessonControlButtons';
+import ModuleControlButtons from "./ModuleControlButtons";
 
 export default function Modules() {
-  const { cid } = useParams();
+    const { cid } = useParams();
+    const [modules, setModules] = useState<any[]>([]);
+    const [moduleName, setModuleName] = useState("");
 
-  const modulesForCourse = db.modules.filter(module => module.course === cid);
+    const addModule = () => {
+        if (moduleName) {
+            const newModule = {
+                _id: new Date().getTime().toString(),
+                name: moduleName,
+                course: cid, 
+                lessons: []
+            };
+            setModules(prevModules => [...prevModules, newModule]);
+            setModuleName("");
+        }
+    };
 
-  return (
-    <div>
-      <div id="wd-modules">
-        <ModulesControls />
-        <ul className="list-group rounded-0">
-          {modulesForCourse.map((module, index) => (
-            <li key={index} className="wd-module list-group-item p-0 mb-5 fs-5 border-gray">
-              <div className="wd-title p-3 ps-2 bg-secondary">
-                <BsGripVertical className="me-2 fs-3" />
-                {module.name}
-              </div>
-              {module.lessons && (
-                <ul className="wd-lessons list-group rounded-0">
-                  {module.lessons.map((lesson, lessonIndex) => (
-                    <li key={lessonIndex} className="wd-lesson list-group-item p-3 ps-1">
-                      <BsGripVertical className="me-2 fs-3" />
-                      {lesson.name}
-                      <LessonControlButtons />
+    const deleteModule = (moduleId: string) => {
+        setModules(prevModules => prevModules.filter(module => module._id !== moduleId));
+    };
+
+    return (
+        <div className="wd-modules">
+            <ModulesControls 
+                moduleName={moduleName} 
+                setModuleName={setModuleName} 
+                addModule={addModule}
+            />
+            <ul id="wd-modules" className="list-group rounded-0">
+                {modules.map((module) => (
+                    <li key={module._id} className="wd-module list-group-item p-0 mb-5 fs-5 border-gray">
+                        <div className="wd-title p-3 ps-2 bg-secondary">
+                            {module.name}
+                            <ModuleControlButtons
+                                moduleId={module._id}
+                                deleteModule={deleteModule}
+                                editModule={() => console.log('Edit module')}
+                            />
+                        </div>
                     </li>
-                  ))}
-                </ul>
-              )}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  );
+                ))}
+            </ul>
+        </div>
+    );
 }

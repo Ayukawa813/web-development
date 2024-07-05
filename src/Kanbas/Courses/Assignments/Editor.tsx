@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { BsTrash, BsSave } from 'react-icons/bs';
-import db from '../../Database'; 
+import db from '../../Database';
 
 type AssignmentType = {
   _id: string;
@@ -11,7 +11,7 @@ type AssignmentType = {
   points: number;
   dueDate: string;
   availableFrom: string;
-} | null;  // 允许为空
+} | null;
 
 export default function AssignmentEditor() {
   const { cid, aid } = useParams<{ cid: string; aid: string }>();
@@ -35,6 +35,13 @@ export default function AssignmentEditor() {
               <input type="text" className="form-control" id="wd-name" defaultValue={assignment?.title} />
             </div>
 
+            <div className="form-check mb-3">
+              <input className="form-check-input" type="checkbox" value="" id="availableOnline" checked />
+              <label className="form-check-label" htmlFor="availableOnline">
+                The assignment is available online
+              </label>
+            </div>
+
             <div className="mb-3">
               <label htmlFor="wd-description" className="form-label">Description</label>
               <textarea id="wd-description" className="form-control" defaultValue={assignment?.description}></textarea>
@@ -43,6 +50,11 @@ export default function AssignmentEditor() {
             <div className="mb-3">
               <label htmlFor="wd-points" className="form-label">Points</label>
               <input type="number" className="form-control" id="wd-points" defaultValue={assignment?.points} />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="wd-assign-to" className="form-label">Assign To</label>
+              <input type="text" className="form-control" id="wd-assign-to" defaultValue="Everyone" />
             </div>
 
             <div className="mb-3">
