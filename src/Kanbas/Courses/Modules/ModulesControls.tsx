@@ -1,27 +1,26 @@
 import React from 'react';
 import { FaPlus } from "react-icons/fa";
 import GreenCheckmark from "./GreenCheckmark";
+import ModuleEditor from "./ModuleEditor";
 
-interface ModulesControlsProps {
-  moduleName: string;
-  setModuleName: (name: string) => void;
-  addModule: () => void;
-}
+export default function ModulesControls(
+  { moduleName, setModuleName, addModule }:
+  { moduleName: string; setModuleName: (title: string) => void; addModule: (moduleName: string) => void; }) {
+  // 在此处处理添加模块的逻辑
+  const handleAddModule = () => {
+    if (moduleName.trim() !== "") {
+      addModule(moduleName);
+      setModuleName(""); // 重置 moduleName 以便下次输入
+    }
+  }
 
-const ModulesControls: React.FC<ModulesControlsProps> = ({ moduleName, setModuleName, addModule }) => {
   return (
     <div id="wd-modules-controls" className="text-nowrap">
-      <button id="wd-add-module-btn" className="btn btn-lg btn-danger me-1 float-end"
-        onClick={addModule}>
+      <button id="wd-add-module-btn" className="btn btn-lg btn-danger me-1 float-end" onClick={handleAddModule}>
         <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
         Module
       </button>
-      <input 
-        className="form-control mb-3" 
-        value={moduleName} 
-        onChange={e => setModuleName(e.target.value)} 
-        placeholder="Enter Module Name" 
-      />
+
       <div className="dropdown d-inline me-1 float-end">
         <button id="wd-publish-all-btn" className="btn btn-lg btn-secondary dropdown-toggle"
           type="button" data-bs-toggle="dropdown">
@@ -41,10 +40,30 @@ const ModulesControls: React.FC<ModulesControlsProps> = ({ moduleName, setModule
               Publish modules only
             </a>
           </li>
+          <li>
+            <a id="wd-unpublish-all-modules-and-items" className="dropdown-item" href="#">
+              <GreenCheckmark />
+              Unpublish all modules and items
+            </a>
+          </li>
+          <li>
+            <a id="wd-unpublish-modules-only" className="dropdown-item" href="#">
+              <GreenCheckmark />
+              Unpublish modules only
+            </a>
+          </li>
         </ul>
       </div>
+
+      <button id="wd-view-progress" className="btn btn-lg btn-info me-1 float-end">
+        View Progress
+      </button>
+      <button id="wd-collapse-all" className="btn btn-lg btn-warning float-end">
+        Collapse All
+      </button>
+
+      <ModuleEditor dialogTitle="Add Module" moduleName={moduleName}
+                    setModuleName={setModuleName} addModule={() => {}} />
     </div>
   );
 }
-
-export default ModulesControls;

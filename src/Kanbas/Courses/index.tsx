@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, Route, Routes, useParams, useLocation } from "react-router-dom";
 import { FaAlignJustify } from 'react-icons/fa';
-import db from "../Database";
 
 import CoursesNavigation from "./Navigation";
 import Modules from "./Modules";
@@ -10,9 +9,23 @@ import Home from "./Home";
 import Assignments from "./Assignments";
 import AssignmentEditor from "./Assignments/Editor";
 
-export default function Courses() {
+interface Course {
+  _id: string;
+  name: string;
+  number: string;
+  startDate: string;
+  endDate: string;
+  image?: string;
+  description: string;
+}
+
+interface CoursesProps {
+  courses: Course[];
+}
+
+const Courses: React.FC<CoursesProps> = ({ courses }) => {
   const { cid } = useParams();
-  const course = db.courses.find(course => course._id === cid);
+  const course = courses.find(course => course._id === cid);
   const { pathname } = useLocation();
 
   return (
@@ -38,3 +51,5 @@ export default function Courses() {
     </div>
   );
 }
+
+export default Courses;

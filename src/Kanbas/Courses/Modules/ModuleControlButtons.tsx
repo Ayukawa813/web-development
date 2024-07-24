@@ -1,18 +1,24 @@
 import React from 'react';
-import { FaPencil } from "react-icons/fa6";
-import { FaTrash } from "react-icons/fa";
+import { BsPlus } from 'react-icons/bs';
+import { IoEllipsisVertical } from 'react-icons/io5';
+import GreenCheckmark from './GreenCheckmark';
+import ModuleEditor from "./ModuleEditor";
 
 interface ModuleControlButtonsProps {
-  moduleId: string;
-  deleteModule: (moduleId: string) => void;
-  editModule: (moduleId: string) => void;
+  setModuleName: (name: string) => void;
+  moduleName: string;
+  addModule: () => void;
 }
 
-const ModuleControlButtons: React.FC<ModuleControlButtonsProps> = ({ moduleId, deleteModule, editModule }) => {
+const ModuleControlButtons: React.FC<ModuleControlButtonsProps> = ({ setModuleName, moduleName, addModule }) => {
   return (
     <div className="float-end">
-      <FaPencil onClick={() => editModule(moduleId)} className="text-primary me-3" />
-      <FaTrash className="text-danger me-2 mb-1" onClick={() => deleteModule(moduleId)} />
+      <GreenCheckmark />
+      <button className="btn p-0" data-bs-toggle="modal" data-bs-target="#wd-add-module-dialog">
+        <BsPlus className="fs-4 mx-2" />
+      </button>
+      <IoEllipsisVertical className="fs-4" />
+      <ModuleEditor dialogTitle="Add Module" moduleName={moduleName} setModuleName={setModuleName} addModule={addModule} />
     </div>
   );
 };
